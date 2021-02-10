@@ -33,3 +33,17 @@
     right: 10px;
     top: 270px;
 }
+
+.slidercontainer {
+    position: absolute;
+    -webkit-appearance: none;
+    width: 100%;
+    top: 300px;
+    height: 25px;
+    background: #425ceb;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+  }
+

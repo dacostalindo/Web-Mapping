@@ -27,8 +27,8 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="#">Home</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Upload data</a>
+                <li class="nav-item" id="overlay">
+                    <input type="file" id="geotiff-file">
                 </li>
             </ul>
         </div>
@@ -40,7 +40,12 @@
         <div class="leaflet-control map-coordinate">
             <div class="coordinate"></div>
         </div>
-        
+
+        <div class="leaflet-control slidecontainer">
+            <p>Default range slider:</p>
+            <input type="range" id="slide" min="0" max="1" step="0.01" value="0.5" onchange="updateOpacity(this.value)">
+        </div>
+
         <!--Full browser-->
         <div class="leaflet-control full-screen" onclick=fullScreenview()>
             <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-fullscreen" viewBox="0 0 16 16">
@@ -60,12 +65,20 @@
 </html>
 
 <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
+<script src="https://unpkg.com/georaster"></script>
+<script src="https://unpkg.com/proj4"></script>
+<script src="https://unpkg.com/georaster-layer-for-leaflet/georaster-layer-for-leaflet.browserify.min.js"></script>
+<script src="https://unpkg.com/georaster-layer-for-leaflet/georaster-layer-for-leaflet.browserify.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+<script src="https://unpkg.com/georaster-layer-for-leaflet/georaster-layer-for-leaflet.browserify.min.js"></script>
 <script src="./lib/leaflet.browser.print.min.js"></script>
 <script src="./lib/leaflet-measure.js"></script>
 <script src="./lib/leaflet.markercluster.js"></script>
 <script src="./data/test.js"></script>
 <script src="./dist/main.js"></script>
 <script src="./dist/web-GIS.js"></script>
+<script src="./lib/shp.js"></script>
+<script src="./lib/leaflet.shpfile.js"></script>
 
