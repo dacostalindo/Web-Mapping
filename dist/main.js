@@ -21,7 +21,7 @@ document.getElementById("geotiff-file").addEventListener("change", function(even
     var extension =  file.name.substring(file.name.length - 3, file.name.length)
 
     console.log("file:", file);
-
+    
     if (extension == "tif") {
         var reader = new FileReader();
         reader.readAsArrayBuffer(file);
@@ -50,19 +50,44 @@ document.getElementById("geotiff-file").addEventListener("change", function(even
         })
         };
     } else if (extension == "shp") {
-        var shapefile = new L.shapefile(file)
-        shapefile.addTo(map)
+
+        var reader = new FileReader();
+        reader.readAsArrayBuffer(file);
+        reader.onloadend = function() {
+        var arrayBuffer = reader.result;
+
+        var geo = L.geoJson({features:[]},{onEachFeature:function popUp(f,l){
+    		var out = [];
+    		if (f.properties){
+        		for(var key in f.properties){
+            	out.push(key+": "+f.properties[key]);
+        }
+        l.bindPopup(out.join("<br />"));
+        }
+        }}).addTo(map);
+
+
+
+		shp("AGROSEGURO_CENTRO_AOI_EPSG32630").then(function(data){
+		geo.addData(data);
+		})
+
         console.log('shapefile branch')
+        }
     }
     
 });
+
+function updateOpacity(value) {
+    layer.setOpacity(value);
+} 
 
 
 L.control.scale().addTo(map)
 
 // Map coordinate display
 map.on('mousemove', function(e) { 
-    console.log(e)
+    // console.log(e)
     $('.coordinate').html(`Lat: ${e.latlng.lat} Lng: ${e.latlng.lng}`)
 })
 
